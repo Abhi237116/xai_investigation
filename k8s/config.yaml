@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fci-config
+  namespace: fci
+data:
+  APP_ENV: "development"
+  DATABASE_URL: "sqlite:////tmp/investigation.db"
+  KAFKA_BOOTSTRAP_SERVERS: "redpanda:9092"
+  LLM_PROVIDER: "disabled"
+  MODEL_ARTIFACT_PATH: "/models/xgboost.joblib"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fci-secrets
+  namespace: fci
+type: Opaque
+stringData:
+  GROQ_API_KEY: ""
+  GEMINI_API_KEY: ""

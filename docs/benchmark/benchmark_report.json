@@ -1,0 +1,137 @@
+{
+  "ml": {
+    "status": "measured",
+    "models": {
+      "logistic_regression": {
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "brier_score": 0.00035032977078663057,
+        "threshold": 0.5,
+        "test_rows": 100
+      },
+      "random_forest": {
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "brier_score": 0.00029166923715612134,
+        "threshold": 0.5,
+        "test_rows": 100
+      },
+      "xgboost": {
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "brier_score": 1.507532306277426e-05,
+        "threshold": 0.5,
+        "test_rows": 100
+      }
+    }
+  },
+  "xai": {
+    "status": "measured",
+    "faithfulness": {
+      "metric": "spearman_shap_vs_ablation",
+      "faithfulness": null,
+      "status": "uninformative"
+    },
+    "stability": {
+      "metric": "spearman_rank_correlation",
+      "stability": 1.0
+    }
+  },
+  "agents": {
+    "status": "measured",
+    "metrics": {
+      "evidence_recall_at_10": {
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0
+      },
+      "citation_correctness": {
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0
+      },
+      "tool_call_accuracy": {
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0
+      },
+      "unsupported_claim_rate": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "hallucination_rate": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "counterfactual_validity": {
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0
+      },
+      "task_completion": {
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0
+      }
+    }
+  },
+  "api": {
+    "status": "measured_in_process",
+    "latency_ms": {
+      "mean": 27.03841999755241,
+      "p50": 29.181900012190454,
+      "p95": 38.23415999067947
+    }
+  },
+  "database": {
+    "status": "measured_sqlite",
+    "query": "select up to 100 transactions",
+    "latency_ms": {
+      "mean": 3.5462299987557344,
+      "p50": 2.400650002527982,
+      "p95": 6.000264996691838
+    }
+  },
+  "streaming": {
+    "status": "processor_simulation_only",
+    "events": 100,
+    "events_per_second": 120.29794432603384,
+    "latency_ms": {
+      "mean": 7.689598000142723,
+      "p50": 7.088450001901947,
+      "p95": 9.106255004007835
+    },
+    "consumer_lag": null,
+    "broker_status": "not_run_requires_Docker"
+  },
+  "kafka": {
+    "status": "not_run",
+    "reason": "requires Docker/Redpanda broker"
+  },
+  "llm": {
+    "status": "disabled",
+    "token_usage": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  "dataset": {
+    "source": "synthetic-seed-42",
+    "sha256": "7777fbd132dfd80df94442fb578955668a62fc67ae618fdb65c39503c004aaaa",
+    "rows": "500",
+    "schema_version": "1"
+  },
+  "model_version": "0.1.0",
+  "note": "Synthetic development benchmark only; not representative of production performance."
+}

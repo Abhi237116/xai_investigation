@@ -1,0 +1,21 @@
+{
+  "fixture_version": "1",
+  "dataset": "synthetic-seed-42",
+  "rows": 500,
+  "split": "XGBoost held-out test partition",
+  "required_evidence_sources": [
+    "get_transaction",
+    "get_device_history",
+    "get_beneficiary_history",
+    "get_model_prediction",
+    "get_shap_explanation",
+    "generate_counterfactual"
+  ],
+  "cases": [
+    {"transaction_id": "TX-0000401"},
+    {"transaction_id": "TX-0000450"},
+    {"transaction_id": "TX-0000490"},
+    {"transaction_id": "TX-0000410"},
+    {"transaction_id": "TX-0000419"}
+  ]
+}

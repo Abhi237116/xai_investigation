@@ -1,0 +1,81 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://investigator@postgres/investigation
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    volumes: ["./artifacts/models:/app/artifacts/models:ro"]
+    ports: ["8000:8000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      kafka: { condition: service_started }
+      redis: { condition: service_started }
+  worker:
+    build: .
+    command: ["python", "-m", "financial_crime.streaming.cli"]
+    env_file: .env
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      MODEL_ARTIFACT_PATH: /app/artifacts/models/xgboost.joblib
+    volumes: ["./artifacts/models:/app/artifacts/models:ro"]
+    depends_on: [kafka]
+  dashboard:
+    build: ./apps/dashboard
+    ports: ["5173:5173"]
+    depends_on: [api]
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: investigation
+      POSTGRES_USER: investigator
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U investigator -d investigation"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+  redis:
+    image: redis:7-alpine
+  kafka:
+    image: redpandadata/redpanda:v24.3.3
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp
+      - "1"
+      - --memory
+      - 512M
+      - --reserve-memory
+      - 0M
+      - --node-id
+      - "0"
+      - --check=false
+      - --kafka-addr
+      - internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr
+      - internal://kafka:9092,external://localhost:19092
+    ports: ["19092:19092"]
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    profiles: [monitoring]
+    command: ["--config.file=/etc/prometheus/prometheus.yml"]
+    volumes: ["./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+    ports: ["9090:9090"]
+    depends_on: [api]
+  grafana:
+    image: grafana/grafana:11.4.0
+    profiles: [monitoring]
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: "${GRAFANA_ADMIN_PASSWORD:-local-demo-only}"
+    volumes:
+      - "./observability/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro"
+      - "./observability/grafana-dashboard-provider.yml:/etc/grafana/provisioning/dashboards/fci.yml:ro"
+      - "./observability/fci-dashboard.json:/var/lib/grafana/dashboards/fci.json:ro"
+    ports: ["3000:3000"]
+    depends_on: [prometheus]
+volumes:
+  postgres_data:

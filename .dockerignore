@@ -1,0 +1,15 @@
+.git
+.env
+.venv
+__pycache__
+*.py[cod]
+.pytest_tmp
+.ruff_cache
+data
+artifacts
+apps/dashboard/node_modules
+apps/dashboard/dist
+node_modules
+tests
+evaluation/fixtures
+MD_project_design

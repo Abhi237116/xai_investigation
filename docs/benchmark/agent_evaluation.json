@@ -1,0 +1,166 @@
+{
+  "evaluation_version": "1",
+  "dataset": {
+    "source": "synthetic-seed-42",
+    "sha256": "7777fbd132dfd80df94442fb578955668a62fc67ae618fdb65c39503c004aaaa",
+    "rows": "500",
+    "schema_version": "1"
+  },
+  "model": {
+    "name": "xgboost",
+    "version": "0.1.0",
+    "test_rows": 100
+  },
+  "llm_provider": "disabled",
+  "cases": 5,
+  "metrics": {
+    "evidence_recall_at_10": {
+      "mean": 1.0,
+      "p50": 1.0,
+      "p95": 1.0
+    },
+    "citation_correctness": {
+      "mean": 1.0,
+      "p50": 1.0,
+      "p95": 1.0
+    },
+    "tool_call_accuracy": {
+      "mean": 1.0,
+      "p50": 1.0,
+      "p95": 1.0
+    },
+    "unsupported_claim_rate": {
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0
+    },
+    "hallucination_rate": {
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0
+    },
+    "counterfactual_validity": {
+      "mean": 1.0,
+      "p50": 1.0,
+      "p95": 1.0
+    },
+    "task_completion": {
+      "mean": 1.0,
+      "p50": 1.0,
+      "p95": 1.0
+    }
+  },
+  "latency_ms": {
+    "mean": 1147.1151600009762,
+    "p50": 495.9015000058571,
+    "p95": 3032.4537600041363
+  },
+  "llm_token_usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "ml_benchmark": {
+    "logistic_regression": {
+      "pr_auc": 1.0,
+      "roc_auc": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "brier_score": 0.00035032977078663057,
+      "threshold": 0.5,
+      "test_rows": 100
+    },
+    "random_forest": {
+      "pr_auc": 1.0,
+      "roc_auc": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "brier_score": 0.00029166923715612134,
+      "threshold": 0.5,
+      "test_rows": 100
+    },
+    "xgboost": {
+      "pr_auc": 1.0,
+      "roc_auc": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "brier_score": 1.507532306277426e-05,
+      "threshold": 0.5,
+      "test_rows": 100
+    }
+  },
+  "case_results": [
+    {
+      "case_id": "CASE-TX-0000401",
+      "evidence_recall_at_10": 1.0,
+      "citation_correctness": 1.0,
+      "tool_call_accuracy": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "counterfactual_validity": 1.0,
+      "task_completion": 1.0,
+      "verification_result": "PASS",
+      "latency_ms": 3632.360100004007,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0
+    },
+    {
+      "case_id": "CASE-TX-0000450",
+      "evidence_recall_at_10": 1.0,
+      "citation_correctness": 1.0,
+      "tool_call_accuracy": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "counterfactual_validity": 1.0,
+      "task_completion": 1.0,
+      "verification_result": "PASS",
+      "latency_ms": 493.1445999973221,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0
+    },
+    {
+      "case_id": "CASE-TX-0000490",
+      "evidence_recall_at_10": 1.0,
+      "citation_correctness": 1.0,
+      "tool_call_accuracy": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "counterfactual_validity": 1.0,
+      "task_completion": 1.0,
+      "verification_result": "PASS",
+      "latency_ms": 495.9015000058571,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0
+    },
+    {
+      "case_id": "CASE-TX-0000410",
+      "evidence_recall_at_10": 1.0,
+      "citation_correctness": 1.0,
+      "tool_call_accuracy": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "counterfactual_validity": 1.0,
+      "task_completion": 1.0,
+      "verification_result": "PASS",
+      "latency_ms": 632.8284000046551,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0
+    },
+    {
+      "case_id": "CASE-TX-0000419",
+      "evidence_recall_at_10": 1.0,
+      "citation_correctness": 1.0,
+      "tool_call_accuracy": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "counterfactual_validity": 1.0,
+      "task_completion": 1.0,
+      "verification_result": "PASS",
+      "latency_ms": 481.3411999930395,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0
+    }
+  ]
+}

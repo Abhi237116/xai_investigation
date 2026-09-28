@@ -1,0 +1,129 @@
+<!doctype html><meta charset='utf-8'><title>FCI System Benchmark</title>
+<style>body{font:14px system-ui;max-width:1100px;margin:32px auto;color:#182220}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccd5d2;
+padding:12px;text-align:left;vertical-align:top}pre{white-space:pre-wrap;
+overflow-wrap:anywhere}aside{padding:12px;background:#eef4f1}</style>
+<h1>System benchmark</h1>
+<aside>Synthetic development results; not a production benchmark.</aside>
+<p>Dataset hash: 7777fbd132dfd80df94442fb578955668a62fc67ae618fdb65c39503c004aaaa | Model 0.1.0</p>
+<table><thead><tr><th>Subsystem</th><th>Status</th><th>Details</th></tr></thead>
+<tbody><tr><th>ml</th><td>measured</td><td><pre>{
+  &quot;status&quot;: &quot;measured&quot;,
+  &quot;models&quot;: {
+    &quot;logistic_regression&quot;: {
+      &quot;pr_auc&quot;: 1.0,
+      &quot;roc_auc&quot;: 1.0,
+      &quot;precision&quot;: 1.0,
+      &quot;recall&quot;: 1.0,
+      &quot;f1&quot;: 1.0,
+      &quot;brier_score&quot;: 0.00035032977078663057,
+      &quot;threshold&quot;: 0.5,
+      &quot;test_rows&quot;: 100
+    },
+    &quot;random_forest&quot;: {
+      &quot;pr_auc&quot;: 1.0,
+      &quot;roc_auc&quot;: 1.0,
+      &quot;precision&quot;: 1.0,
+      &quot;recall&quot;: 1.0,
+      &quot;f1&quot;: 1.0,
+      &quot;brier_score&quot;: 0.00029166923715612134,
+      &quot;threshold&quot;: 0.5,
+      &quot;test_rows&quot;: 100
+    },
+    &quot;xgboost&quot;: {
+      &quot;pr_auc&quot;: 1.0,
+      &quot;roc_auc&quot;: 1.0,
+      &quot;precision&quot;: 1.0,
+      &quot;recall&quot;: 1.0,
+      &quot;f1&quot;: 1.0,
+      &quot;brier_score&quot;: 1.507532306277426e-05,
+      &quot;threshold&quot;: 0.5,
+      &quot;test_rows&quot;: 100
+    }
+  }
+}</pre></td></tr><tr><th>xai</th><td>measured</td><td><pre>{
+  &quot;status&quot;: &quot;measured&quot;,
+  &quot;faithfulness&quot;: {
+    &quot;metric&quot;: &quot;spearman_shap_vs_ablation&quot;,
+    &quot;faithfulness&quot;: null,
+    &quot;status&quot;: &quot;uninformative&quot;
+  },
+  &quot;stability&quot;: {
+    &quot;metric&quot;: &quot;spearman_rank_correlation&quot;,
+    &quot;stability&quot;: 1.0
+  }
+}</pre></td></tr><tr><th>agents</th><td>measured</td><td><pre>{
+  &quot;status&quot;: &quot;measured&quot;,
+  &quot;metrics&quot;: {
+    &quot;evidence_recall_at_10&quot;: {
+      &quot;mean&quot;: 1.0,
+      &quot;p50&quot;: 1.0,
+      &quot;p95&quot;: 1.0
+    },
+    &quot;citation_correctness&quot;: {
+      &quot;mean&quot;: 1.0,
+      &quot;p50&quot;: 1.0,
+      &quot;p95&quot;: 1.0
+    },
+    &quot;tool_call_accuracy&quot;: {
+      &quot;mean&quot;: 1.0,
+      &quot;p50&quot;: 1.0,
+      &quot;p95&quot;: 1.0
+    },
+    &quot;unsupported_claim_rate&quot;: {
+      &quot;mean&quot;: 0.0,
+      &quot;p50&quot;: 0.0,
+      &quot;p95&quot;: 0.0
+    },
+    &quot;hallucination_rate&quot;: {
+      &quot;mean&quot;: 0.0,
+      &quot;p50&quot;: 0.0,
+      &quot;p95&quot;: 0.0
+    },
+    &quot;counterfactual_validity&quot;: {
+      &quot;mean&quot;: 1.0,
+      &quot;p50&quot;: 1.0,
+      &quot;p95&quot;: 1.0
+    },
+    &quot;task_completion&quot;: {
+      &quot;mean&quot;: 1.0,
+      &quot;p50&quot;: 1.0,
+      &quot;p95&quot;: 1.0
+    }
+  }
+}</pre></td></tr><tr><th>api</th><td>measured_in_process</td><td><pre>{
+  &quot;status&quot;: &quot;measured_in_process&quot;,
+  &quot;latency_ms&quot;: {
+    &quot;mean&quot;: 27.03841999755241,
+    &quot;p50&quot;: 29.181900012190454,
+    &quot;p95&quot;: 38.23415999067947
+  }
+}</pre></td></tr><tr><th>database</th><td>measured_sqlite</td><td><pre>{
+  &quot;status&quot;: &quot;measured_sqlite&quot;,
+  &quot;query&quot;: &quot;select up to 100 transactions&quot;,
+  &quot;latency_ms&quot;: {
+    &quot;mean&quot;: 3.5462299987557344,
+    &quot;p50&quot;: 2.400650002527982,
+    &quot;p95&quot;: 6.000264996691838
+  }
+}</pre></td></tr><tr><th>streaming</th><td>processor_simulation_only</td><td><pre>{
+  &quot;status&quot;: &quot;processor_simulation_only&quot;,
+  &quot;events&quot;: 100,
+  &quot;events_per_second&quot;: 120.29794432603384,
+  &quot;latency_ms&quot;: {
+    &quot;mean&quot;: 7.689598000142723,
+    &quot;p50&quot;: 7.088450001901947,
+    &quot;p95&quot;: 9.106255004007835
+  },
+  &quot;consumer_lag&quot;: null,
+  &quot;broker_status&quot;: &quot;not_run_requires_Docker&quot;
+}</pre></td></tr><tr><th>kafka</th><td>not_run</td><td><pre>{
+  &quot;status&quot;: &quot;not_run&quot;,
+  &quot;reason&quot;: &quot;requires Docker/Redpanda broker&quot;
+}</pre></td></tr><tr><th>llm</th><td>disabled</td><td><pre>{
+  &quot;status&quot;: &quot;disabled&quot;,
+  &quot;token_usage&quot;: {
+    &quot;input_tokens&quot;: 0,
+    &quot;output_tokens&quot;: 0
+  }
+}</pre></td></tr></tbody></table>

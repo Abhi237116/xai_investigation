@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "financial-crime-investigation-ai"
+version = "0.1.0"
+description = "Evidence-grounded financial crime investigation decision support"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.30,<1",
+  "pydantic-settings>=2.5,<3",
+  "pandas>=2.2,<4",
+  "scikit-learn>=1.5,<2",
+  "networkx>=3.3,<4",
+  "sqlalchemy>=2.0,<3",
+  "psycopg[binary]>=3.2,<4",
+  "joblib>=1.4,<2",
+  "shap>=0.46,<1",
+  "xgboost>=2.1,<4",
+  "confluent-kafka>=2.6,<3",
+  "langgraph>=1.2,<2",
+  "python-multipart>=0.0.12,<1",
+]
+
+[project.optional-dependencies]
+agents = ["mcp>=1.2,<2", "openai>=1.50,<3", "google-genai>=1,<2"]
+observability = ["opentelemetry-api>=1.28,<2", "opentelemetry-sdk>=1.28,<2", "opentelemetry-exporter-otlp-proto-http>=1.28,<2", "opentelemetry-instrumentation-fastapi>=0.49b0,<1"]
+dev = ["pytest>=8.3,<9", "httpx>=0.27,<1", "ruff>=0.7,<1"]
+
+[project.scripts]
+fci-stream-worker = "financial_crime.streaming.cli:main"
+fci-mcp-server = "financial_crime.evidence.mcp_server:main"
+
+[tool.setuptools.packages.find]
+include = ["financial_crime*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--basetemp=.pytest_tmp"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"financial_crime/api/*.py" = ["B008"]

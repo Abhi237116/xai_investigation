@@ -1,0 +1,14 @@
+{
+  "title": "Financial Crime Investigation API",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "panels": [
+    {"id":1,"type":"stat","title":"API requests","gridPos":{"h":5,"w":6,"x":0,"y":0},"targets":[{"expr":"fci_api_requests_total"}]},
+    {"id":2,"type":"stat","title":"API failures","gridPos":{"h":5,"w":6,"x":6,"y":0},"targets":[{"expr":"fci_api_failures_total"}]},
+    {"id":3,"type":"stat","title":"API p95 latency (seconds)","gridPos":{"h":5,"w":6,"x":12,"y":0},"targets":[{"expr":"fci_api_latency_p95_seconds"}]},
+    {"id":4,"type":"stat","title":"Tool failures","gridPos":{"h":5,"w":6,"x":18,"y":0},"targets":[{"expr":"fci_tool_failures_total"}]},
+    {"id":5,"type":"timeseries","title":"API request rate","gridPos":{"h":9,"w":12,"x":0,"y":5},"targets":[{"expr":"rate(fci_api_requests_total[5m])"}]},
+    {"id":6,"type":"timeseries","title":"Evidence tool p95 latency (seconds)","gridPos":{"h":9,"w":12,"x":12,"y":5},"targets":[{"expr":"fci_tool_latency_p95_seconds"}]}
+  ]
+}

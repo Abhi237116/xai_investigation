@@ -1,0 +1,15 @@
+flowchart LR
+  UI[React investigator desk] --> API[FastAPI evidence API]
+  API --> DB[(SQLAlchemy database)]
+  API --> GRAPH[NetworkX relationship graph]
+  API --> AGENT[LangGraph workflow]
+  AGENT --> MCP[Read-only typed evidence tools]
+  MCP --> DB
+  AGENT --> MODEL[LR / RF / XGBoost]
+  MODEL --> SHAP[TreeExplainer]
+  AGENT -. opt-in cited hypotheses .-> LLM[Groq or Gemini]
+  PRODUCER[Synthetic event producer] --> KAFKA[Redpanda / Kafka]
+  KAFKA --> WORKER[Scoring worker]
+  WORKER --> KAFKA
+  API --> PROM[Prometheus metrics]
+  PROM --> GRAF[Grafana]
