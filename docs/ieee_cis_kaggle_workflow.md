@@ -38,6 +38,44 @@ derived tables, credentials, or large artifacts.
 - Excludes `TransactionID` and `isFraud` from the model input feature frame.
 - Keeps unlabeled competition test data separate from training and validation.
 
+## Phase 3 baseline training workflow
+
+After validation passes, train the real-data baselines with:
+
+```bash
+python scripts/train_ieee_cis.py \
+  --data-dir /kaggle/input/competitions/ieee-fraud-detection \
+  --output-dir /kaggle/working/phase3_artifacts
+```
+
+The training workflow implements the Phase 3 requirements:
+
+- Keeps the labeled train split separate from the unlabeled competition test data.
+- Excludes `TransactionID` and `isFraud` from the feature frame.
+- Uses `TransactionDT` to prefer a chronological validation split when both classes are present in both windows.
+- Falls back to a stratified split only when chronological validation is not suitable.
+- Fits preprocessing only on the training split.
+- Uses a categorical/numeric preprocessing pipeline with missing-value handling and one-hot encoding.
+- Compares a dummy baseline, logistic regression, and XGBoost (when available).
+- Saves model artifacts, validation predictions, confusion summaries, and metadata under
+  `/kaggle/working/phase3_artifacts`.
+
+The intended artifact directory structure is:
+
+```text
+/kaggle/working/phase3_artifacts/
+  dummy_classifier_baseline.joblib
+  logistic_regression_baseline.joblib
+  xgboost_baseline.joblib
+  dummy_classifier_validation_predictions.csv
+  logistic_regression_validation_predictions.csv
+  xgboost_validation_predictions.csv
+  phase3_training_summary.json
+```
+
+The metrics and artifact files are intended for download only after a successful Kaggle run. Do not
+claim the real-data baseline is complete until the artifacts are produced and verified in Kaggle.
+
 ## Expected full-dataset audit
 
 The validator calculates these values from the files and reports discrepancies from the currently

@@ -47,6 +47,26 @@ python scripts/validate_ieee_cis.py --data-dir <ieee-cis-csv-directory> --output
 
 In Kaggle, use `/kaggle/input/competitions/ieee-fraud-detection` as the data directory and write the report to `/kaggle/working`. The validator preserves original IEEE-CIS features for later training, keeps `isFraud` only as the target, and keeps unlabeled competition test data separate. See [the IEEE-CIS Kaggle workflow](docs/ieee_cis_kaggle_workflow.md).
 
+## IEEE-CIS model training baseline (Phase 3)
+
+Run the baselines only in Kaggle or another environment that has access to the competition files:
+
+```bash
+python scripts/train_ieee_cis.py \
+  --data-dir /kaggle/input/competitions/ieee-fraud-detection \
+  --output-dir /kaggle/working/phase3_artifacts
+```
+
+The workflow:
+
+1. Loads and validates the real IEEE-CIS transaction and identity files.
+2. Uses the validated loader output so `TransactionID` and `isFraud` are excluded from model inputs.
+3. Splits on `TransactionDT` chronologically when both classes are present in the train and validation windows; otherwise it falls back to a stratified split with a documented warning.
+4. Fits a preprocessing pipeline only on the training split, then evaluates DummyClassifier, logistic regression, and XGBoost (if available).
+5. Saves the pipeline artifact, validation predictions, metrics JSON/CSV, and training metadata under `/kaggle/working/phase3_artifacts`.
+
+This phase does not integrate the model into production inference or modify the demo application. It only trains and benchmarks the baseline candidates.
+
 ## Configuration
 
 Copy `.env.example` to `.env`. Remote LLM providers are disabled by default; set a provider and its own key only when needed. The application remains useful without a provider and returns deterministic evidence summaries. Never commit `.env` or credentials.
