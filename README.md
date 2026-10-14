@@ -39,6 +39,14 @@ python -c "from financial_crime.data.ingest import write_dataset; print(write_da
 
 CSV import supports the canonical schema plus basic IEEE-CIS transaction aliases. IEEE-CIS access is controlled by its Kaggle competition rules and is not bundled. Never place private/customer data in this repository. See [the data dictionary](docs/data_dictionary.md).
 
+Authorized IEEE-CIS validation is separate from the synthetic demo schema and does not train models:
+
+```powershell
+python scripts/validate_ieee_cis.py --data-dir <ieee-cis-csv-directory> --output artifacts/ieee_cis/validation_report.json
+```
+
+In Kaggle, use `/kaggle/input/competitions/ieee-fraud-detection` as the data directory and write the report to `/kaggle/working`. The validator preserves original IEEE-CIS features for later training, keeps `isFraud` only as the target, and keeps unlabeled competition test data separate. See [the IEEE-CIS Kaggle workflow](docs/ieee_cis_kaggle_workflow.md).
+
 ## Configuration
 
 Copy `.env.example` to `.env`. Remote LLM providers are disabled by default; set a provider and its own key only when needed. The application remains useful without a provider and returns deterministic evidence summaries. Never commit `.env` or credentials.

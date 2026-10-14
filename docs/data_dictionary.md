@@ -19,4 +19,6 @@ The demo dataset is synthetic and reproducible. `is_suspicious` is a synthetic l
 | is_suspicious | integer or null | Synthetic/public source label; omitted for unlabeled records |
 | source | string | Dataset provenance label |
 
-AMLSim/IEEE-CIS CSVs can be mapped into the canonical schema. Unavailable fields receive explicit neutral defaults and source columns remain available for audit; the dataset manifest never describes transformed benchmark data as untouched source data.
+AMLSim CSVs can be mapped into the canonical demo schema. Unavailable fields receive explicit neutral defaults and source columns remain available for audit; the dataset manifest never describes transformed benchmark data as untouched source data.
+
+IEEE-CIS is kept in a separate training-data representation. The ingestion validator preserves the original transaction and identity feature columns, left-joins identity rows on `TransactionID`, keeps `isFraud` only as the target, and excludes both `TransactionID` and `isFraud` from model input features. The unlabeled competition test files remain separate from supervised training and validation. See [the Kaggle validation workflow](ieee_cis_kaggle_workflow.md).
